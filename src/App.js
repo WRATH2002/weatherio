@@ -87,7 +87,7 @@ function App() {
             ></input>
             <button
               onClick={() => capletter()}
-              className="w-[35px] ml-[-44px]  drop-shadow-2xl  h-[35px] rounded-full flex justify-center items-center  bg-[#a1f6ffa6] mr-[4px]"
+              className="w-[35px] ml-[-44px]  drop-shadow-2xl  h-[35px] rounded-full flex justify-center items-center  bg-[#57dae8a6] mr-[4px]"
             >
               <BiSearch className="drop-shadow-xl" />
             </button>
