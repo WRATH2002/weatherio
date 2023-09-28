@@ -149,12 +149,12 @@ function App() {
   return (
     <>
       {error === 404 ? <>not dounf</> : <></>}
-      {/* <div
+      <div
         className="w-full font-[CustomFont] h-[60px] lg:h-[70px] md:h-[70px] flex  bg-[#013c58] fixed text-[white] text-[20px] lg:text-[25px] md:text-[25px] font-bold justify-start items-center pl-[30px]"
         style={{ zIndex: "5" }}
       >
         WEATHER.io
-      </div> */}
+      </div>
       <div className="w-full h-[100vh] bg-[#0b1e33] flex justify-center items-center  drop-shadow-2xl ">
         <div className="w-[300px] h-[505px] bg-[#451e3e] rounded-3xl  drop-shadow-2xl p-[20px]">
           <div className="w-full flex justify-center items-center mt-[0px] drop-shadow-lg">
