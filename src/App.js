@@ -116,7 +116,7 @@ function App() {
   const detectKeyDown = (e) => {
     if (e.key === "Enter") {
       console.log("entered");
-      setSearch("");
+
       capletter();
     }
     // console.log(e.key);
@@ -126,6 +126,7 @@ function App() {
     if (search === "" || search === " ") {
       setSearchCity(search);
       console.log("nothing");
+      setSearch("");
     } else {
       var tempsearch = search;
       var middletempsearch = tempsearch.toLowerCase();
@@ -133,6 +134,7 @@ function App() {
         middletempsearch[0].toUpperCase() + middletempsearch.slice(1);
       console.log(updatetempsearch);
       setSearchCity(updatetempsearch);
+      setSearch("");
     }
   }
 
@@ -154,7 +156,7 @@ function App() {
         WEATHER.io
       </div> */}
       <div className="w-full h-[100vh] bg-[#0b1e33] flex justify-center items-center  drop-shadow-2xl ">
-        <div className="w-[300px] h-[505px] bg-[#013c58] rounded-3xl  drop-shadow-2xl p-[20px]">
+        <div className="w-[300px] h-[505px] bg-[#451e3e] rounded-3xl  drop-shadow-2xl p-[20px]">
           <div className="w-full flex justify-center items-center mt-[0px] drop-shadow-lg">
             <FaLocationDot
               className="ml-[11px] mr-[-32px] drop-shadow-lg  "
@@ -171,7 +173,7 @@ function App() {
             <button
               // onKeyDown={(e) => detectKeyDown(e)}
               onClick={() => capletter()}
-              className="w-[35px] ml-[-44px]  drop-shadow-lg  h-[35px] rounded-full flex justify-center items-center  bg-[#57dae8a6] mr-[4px]"
+              className="w-[35px] ml-[-44px] text-white drop-shadow-lg  h-[35px] rounded-full flex justify-center items-center  bg-[#651e3e] mr-[4px]"
             >
               <BiSearch className="drop-shadow-lg" />
             </button>
@@ -388,7 +390,7 @@ function App() {
                     </span>
                   </div>
                   <span
-                    className="font-semibold text-white mt-[-10px] text-[16px] select-none drop-shadow-lg"
+                    className="font-semibold text-white mt-[-10px] text-[14px] select-none drop-shadow-lg"
                     style={{ zIndex: "5" }}
                   >
                     {/* {data?.cod === "400" ? (
