@@ -150,7 +150,7 @@ function App() {
     <>
       {error === 404 ? <>not dounf</> : <></>}
       <div
-        className="w-full font-[CustomFont] h-[60px] lg:h-[70px] md:h-[70px] flex  bg-[#013c58] fixed text-[white] text-[20px] lg:text-[25px] md:text-[25px] font-bold justify-start items-center pl-[30px]"
+        className="w-full font-[CustomFont] h-[60px] lg:h-[70px] md:h-[70px] flex  bg-[#451e3e] fixed text-[white] text-[20px] lg:text-[25px] md:text-[25px] font-bold justify-start items-center pl-[30px]"
         style={{ zIndex: "5" }}
       >
         WEATHER.io
