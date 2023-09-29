@@ -173,7 +173,8 @@ function App() {
             <button
               // onKeyDown={(e) => detectKeyDown(e)}
               onClick={() => capletter()}
-              className="w-[35px] ml-[-44px] text-white drop-shadow-lg  h-[35px] rounded-full flex justify-center items-center  bg-[#651e3e] mr-[4px]"
+              className="w-[35px] ml-[-44px] text-white drop-shadow-lg  h-[35px] rounded-full flex justify-center items-center   bg-[#651e3e] hover:bg-[#451e3e] mr-[4px] "
+              style={{ transition: ".1s" }}
             >
               <BiSearch className="drop-shadow-lg" />
             </button>
