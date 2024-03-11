@@ -7,8 +7,8 @@
   src: url(./assets/font/Quicksand-VariableFont_wght.ttf);
 }
 @font-face {
-  font-family: CustomFonttwo;
-  src: url(./assets/font/Ubuntu-Regular.ttf);
+  font-family: roboto;
+  src: url(./assets/font/Roboto-Regular.ttf);
 }
 input {
   font-family: CustomFont;
@@ -21,4 +21,11 @@ input::placeholder {
   -webkit-transition: all 0.7s ease-in-out;
   -moz-transition: all 0.7s ease-in-out;
   transition: all 0.7s ease-in-out;
+}
+
+.b {
+  background-image: url(./assets/img/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
