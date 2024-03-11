@@ -13,7 +13,7 @@ import { BiSolidUpArrow } from "react-icons/bi";
 import { LuAlarmClock } from "react-icons/lu";
 import { BiErrorCircle } from "react-icons/bi";
 import { BiSolidDownArrow } from "react-icons/bi";
-
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 // ----------------
 import snow_morning from "./assets/img/snow_morning.jpg";
 import snow_afternoon from "./assets/img/snow_afternoon.jpg";
@@ -36,6 +36,16 @@ import { CgArrowLongUp } from "react-icons/cg";
 import { CgArrowLongLeft } from "react-icons/cg";
 import { CgArrowLongRight } from "react-icons/cg";
 import { HiLocationMarker } from "react-icons/hi";
+import { LuMoveRight } from "react-icons/lu";
+import { HiArrowLongRight } from "react-icons/hi2";
+import { BsBrightnessLowFill } from "react-icons/bs";
+import { BsBrightnessAltLowFill } from "react-icons/bs";
+import { WiMoonFull } from "react-icons/wi";
+import { GiStripedSun } from "react-icons/gi";
+import { PiCloudRainFill } from "react-icons/pi";
+import { PiCloudLightningFill } from "react-icons/pi";
+import { PiCloudSunFill } from "react-icons/pi";
+import { PiCloudMoonFill } from "react-icons/pi";
 function App() {
   const [hour, setHour] = useState("");
   const [day, setDay] = useState("");
@@ -231,7 +241,7 @@ function App() {
       </div>
       {side == true ? (
         <div
-          className="w-full h-[100svh] bg-black fixed z-20 px-[15px]"
+          className="w-full h-[100svh] bg-black fixed z-20 px-[10px]"
           style={{ transition: ".4s" }}
         >
           <div
@@ -331,21 +341,106 @@ function App() {
         </div>
       ) : (
         <div
-          className="w-full h-[100svh] bg-black fixed ml-[100%] z-20 px-[15px]"
+          className="w-full h-[100svh] bg-black fixed ml-[100%] z-20 px-[10px]"
           style={{ transition: ".4s" }}
         >
+          <div
+            className="w-full font-[roboto] h-[60px] flex   text-[white] text-[22px] lg:text-[25px] md:text-[25px] font-normal justify-between items-center  "
+            style={{ zIndex: "5" }}
+          >
+            <span
+              className=" flex justify-center items-center h-full w-[40px] z-50"
+              onClick={(e) => {
+                setShow(!show);
+                setSide(!side);
+              }}
+            >
+              {show == true ? (
+                <FiPlus
+                  className="text-white text-[25px] rotate-[135deg] z-50"
+                  style={{ transition: ".4s", zIndex: 100 }}
+                />
+              ) : (
+                <FiPlus
+                  className="text-white text-[25px] z-30"
+                  style={{ transition: ".4s" }}
+                />
+              )}
+            </span>
+            <span className="tracking-wide h-full flex justify-center items-center w-[calc(100%-80px)]">
+              <b></b>
+            </span>
+            <span className=" flex justify-center items-center h-full w-[40px]"></span>
+          </div>
+          <div className="text-white text-[35px] font-[300] font-[roboto]">
+            Search Cities
+          </div>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => detectKeyDown(e)}
+            // onKeyDown={(e) => detectKeyDown(e)}
             // onKeyPress={handleKeypress}
             placeholder="Enter Location"
-            className="w-[calc(100%)] text-[15px] outline-none rounded-xl bg-white pl-[25px] pr-[55px] h-[50px] drop-shadow-sm "
+            className="w-[calc(100%)] text-white text-[15px] mt-[20px] outline-none rounded-xl bg-[#1f1f1f] pl-[25px] pr-[55px] h-[50px] drop-shadow-sm "
             style={{ transition: ".4s" }}
           ></input>
+          <div className="flex flex-col w-full mt-[20px]">
+            {search.length !== 0 ? (
+              <>
+                {suggestion?.map((Element) => {
+                  return (
+                    <>
+                      {Element?.properties?.city ? (
+                        <>
+                          <div
+                            className="bg-[#424b54] w-full h-[70px] mt-[10px] rounded-lg text-white px-[25px] text-[20px] font-[roboto] flex justify-start items-center"
+                            onClick={(e) => {
+                              setCity(Element?.properties?.city);
+                              setCountry(
+                                Element?.properties?.country_code.toUpperCase()
+                              );
+                              setSearch(Element?.properties?.city);
+                              detectKeyDown(e);
+                              setSide(false);
+                              setShow(false);
+                            }}
+                          >
+                            <HiLocationMarker className="text-[20px] mt-[-6px] text-white mr-[5px]" />
+                            <span className="h-[26px] flex justify-start items-end">
+                              {Element?.properties?.city ? (
+                                <>{Element?.properties?.city}</>
+                              ) : (
+                                <>
+                                  {Element?.properties?.address_line1}
+                                  <span className="text-[14px] ml-[2px] text-[#9fa6ae]">
+                                    {Element?.properties?.address_line2}
+                                  </span>
+                                </>
+                              )}
+                            </span>
+                            <span className="text-[14px] ml-[3px] text-[#9fa6ae]">
+                              {Element?.properties?.state},
+                            </span>
+
+                            <span className="text-[14px] ml-[3px] text-[#9fa6ae]">
+                              {Element?.properties?.country_code.toUpperCase()}
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  );
+                })}
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       )}
-      <div className="bg-gradient-to-b from-transparent from-[20%] to-[#615f60] to-[80%] backdrop-blur-lg px-[15px] h-[100dvh]">
+      <div className="bg-gradient-to-b from-transparent from-[20%] to-[#615f60] to-[80%] backdrop-blur-lg px-[10px] h-[100dvh]">
         {error === 404 ? <>not dounf</> : <></>}
         <div
           className="w-full font-[roboto] h-[60px] flex   text-[white] text-[22px] lg:text-[25px] md:text-[25px] font-normal justify-between items-center  "
@@ -374,40 +469,10 @@ function App() {
             <b>{city}</b>,<b className="ml-[3px]">{country}</b>
           </span>
           <span className=" flex justify-center items-center h-full w-[40px]">
-            <BsThreeDotsVertical className="text-white text-[21px]" />
+            {/* <BsThreeDotsVertical className="text-white text-[21px]" /> */}
           </span>
         </div>
-        {/* <div className="w-full px-[15px] fixed flex justify-center items-center top-[60px]"> */}
-        {/* {show === true ? (
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => detectKeyDown(e)}
-            // onKeyPress={handleKeypress}
-            placeholder="Enter Location"
-            className="w-[calc(100%-30px)] opacity-100 left-[15px] text-[15px] outline-none rounded-2xl bg-white pl-[25px] pr-[55px] h-[55px] fixed top-[60px] drop-shadow-sm "
-            style={{ transition: ".4s" }}
-          ></input>
-        ) : (
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => detectKeyDown(e)}
-            // onKeyPress={handleKeypress}
-            placeholder="Enter Location"
-            className="w-[calc(100%-30px)] opacity-0 left-[15px] text-[15px] outline-none rounded-2xl bg-white pl-[25px] pr-[55px] h-[0] fixed top-[60px] drop-shadow-sm "
-            style={{ transition: ".4s" }}
-          ></input>
-        )} */}
-        {/* <button
-            // onKeyDown={(e) => detectKeyDown(e)}
-            onClick={() => capletter()}
-            className="w-[35px] ml-[-44px] text-white drop-shadow-lg  h-[35px] rounded-full flex justify-center items-center   bg-[#651e3e] hover:bg-[#451e3e] mr-[4px] "
-            style={{ transition: ".1s" }}
-          >
-            <BiSearch className="drop-shadow-lg" />
-          </button> */}
-        {/* </div> */}
+
         <div className="w-full h-[calc(100dvh-285px)]  flex flex-col justify-center items-center">
           <div className="flex justify-start items-center h-[140px] w-[140px]  ">
             <div className="text-[120px] w-full text-white font-[400] h-full flex justify-end items-center">
@@ -422,40 +487,169 @@ function App() {
             </div>
           </div>
           <div className="text-white text-[20px] font-[roboto] font-[400]">
-            {weatherType}{" "}
+            <b>{weatherType}</b>{" "}
             <span className="ml-[4px]">
-              {temperature === undefined ? <>0</> : <>{Math.round(tempmax)}°</>}
-              /
-              {temperature === undefined ? <>0</> : <>{Math.round(tempmin)}°</>}
+              <b>
+                {temperature === undefined ? (
+                  <>0</>
+                ) : (
+                  <>{Math.round(tempmax)}°</>
+                )}
+                /
+                {temperature === undefined ? (
+                  <>0</>
+                ) : (
+                  <>{Math.round(tempmin)}°</>
+                )}
+              </b>
             </span>
           </div>
+          <div className="flex mt-[10px]">
+            {weatherType === "Clouds" ? (
+              <>
+                {hour >= 5 && hour <= 13 ? (
+                  <>
+                    <PiCloudSunFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Morning
+                    </span>
+                  </>
+                ) : hour > 13 && hour <= 17 ? (
+                  <>
+                    <PiCloudSunFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Afternoon
+                    </span>
+                  </>
+                ) : hour > 17 && hour <= 20 ? (
+                  <>
+                    <PiCloudMoonFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Afternoon
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <PiCloudMoonFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Night
+                    </span>
+                  </>
+                )}
+              </>
+            ) : weatherType === "Rain" ? (
+              <>
+                {hour >= 5 && hour <= 13 ? (
+                  <>
+                    <PiCloudRainFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Morning
+                    </span>
+                  </>
+                ) : hour > 13 && hour <= 20 ? (
+                  <>
+                    <PiCloudRainFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Afternoon
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <PiCloudRainFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Night
+                    </span>
+                  </>
+                )}
+              </>
+            ) : weatherType === "Thunderstorm" ? (
+              <>
+                {hour >= 5 && hour <= 13 ? (
+                  <>
+                    <PiCloudLightningFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Morning
+                    </span>
+                  </>
+                ) : hour > 13 && hour <= 20 ? (
+                  <>
+                    <PiCloudLightningFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Afternoon
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <PiCloudLightningFill className="text-white text-[25px]" />
+                    <span className="text-white text-[16px] ml-[4px]">
+                      Night
+                    </span>
+                  </>
+                )}
+              </>
+            ) : hour >= 5 && hour <= 13 ? (
+              <>
+                <BsBrightnessLowFill className="text-white text-[29px]" />
+                <span className="text-white text-[16px] ml-[4px]">Morning</span>
+              </>
+            ) : hour > 13 && hour <= 20 ? (
+              <>
+                <GiStripedSun className="text-white text-[25px]" />
+                <span className="text-white text-[16px] ml-[4px]">
+                  Afternoon
+                </span>
+              </>
+            ) : (
+              <>
+                <WiMoonFull className="text-white text-[29px]" />
+                <span className="text-white text-[16px] ml-[4px]">Night</span>
+              </>
+            )}
+          </div>
+          {/* <div className="flex justify-center items-center">
+            <BsBrightnessLowFill className="text-white text-[29px]" />
+            <WiMoonFull className="text-white text-[29px]" />
+            <GiStripedSun className="text-white text-[25px]" />
+            <PiCloudRainFill className="text-white text-[25px]" />
+            <PiCloudLightningFill className="text-white text-[25px]" />
+            <PiCloudSunFill className="text-white text-[25px]" />
+            <PiCloudMoonFill className="text-white text-[25px]" />
+          </div> */}
+          {/* mport {WiMoonFull} from "react-icons/wi"; import {GiStripedSun} from
+          "react-icons/gi"; import {PiCloudRainFill} from "react-icons/pi";
+          import {PiCloudLightningFill} from "react-icons/pi"; import{" "}
+          {PiCloudSunFill} from "react-icons/pi";import {PiCloudMoonFill} from
+          "react-icons/pi"; */}
         </div>
         <div className="w-full h-[210px]  flex justify-center items-center  rounded-2xl">
-          <div className="h-full w-[calc((100%-15px)/2)] ">
-            <div className="w-full h-[calc((100%-15px)/2)] bg-[#00000025] rounded-2xl flex justify-between items-center px-[15px]">
+          <div className="h-full w-[calc((100%-10px)/2)] ">
+            <div className="w-full h-[calc((100%-10px)/2)] bg-[#00000025] rounded-2xl flex justify-between items-center px-[10px]">
               <div className="text-white text-[16px] font-[roboto] flex flex-col justify-center items-start">
-                <span>
+                <span className="whitespace-pre-wrap">
                   {degree === 0 ? (
                     <>West</>
                   ) : degree > 0 && degree < 90 ? (
-                    <>NorthWest</>
+                    <>North - West</>
                   ) : degree == 90 ? (
                     <>North</>
                   ) : degree > 90 && degree < 180 ? (
-                    <>NorthEast</>
+                    <>North - East</>
                   ) : degree == 180 ? (
                     <>East</>
                   ) : degree > 180 && degree < 270 ? (
-                    <>SouthEast</>
+                    <>South - East</>
                   ) : degree == 270 ? (
                     <>South</>
                   ) : degree > 270 && degree < 360 ? (
-                    <>SouthWest</>
+                    <>South - West</>
                   ) : (
                     <>West</>
                   )}
                 </span>
-                <span>{data?.wind?.speed}km/h</span>
+                <span>
+                  {data?.wind?.speed}
+                  <span className="text-[13px] ml-[2px]">km/h</span>
+                </span>
               </div>
               <div className="border border-[#c1c0c0] font-[roboto] rounded-full flex flex-col justify-center items-center w-[70px] h-[70px] text-[#cecece] text-[11px]">
                 <div className="w-full h-[calc(100%/3)] flex justify-center items-center">
@@ -470,7 +664,7 @@ function App() {
                     W
                   </div>
                   <div className="w-[calc(100%/3)] h-full flex justify-center items-center overflow-visible">
-                    <CgArrowLongRight
+                    <HiArrowLongRight
                       className="text-[40px] fixed text-white "
                       style={{ rotate: `${degreee}` }}
                     />
@@ -488,8 +682,8 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="h-[15px] w-full"></div>
-            <div className="w-full h-[calc((100%-15px)/2)] bg-[#00000025] rounded-2xl flex justify-between items-center px-[15px]">
+            <div className="h-[10px] w-full"></div>
+            <div className="w-full h-[calc((100%-10px)/2)] bg-[#00000025] rounded-2xl flex justify-between items-center px-[15px]">
               <div className="text-white text-[16px] font-[roboto] flex flex-col justify-center items-start">
                 <span className="flex justify-start items-end">
                   {timeOne}{" "}
@@ -507,8 +701,8 @@ function App() {
               <div className=""></div>
             </div>
           </div>
-          <div className="h-full w-[15px]"></div>
-          <div className="h-full w-[calc((100%-15px)/2)] bg-[#00000025]  rounded-2xl flex flex-col justify-start text-white items-center p-[15px]">
+          <div className="h-full w-[10px]"></div>
+          <div className="h-full w-[calc((100%-10px)/2)] bg-[#00000025]  rounded-2xl flex flex-col justify-start text-white items-center p-[15px]">
             <span className="w-full flex justify-between items-center text-[#c1c0c0] h-[40px] text-[14px]">
               <span>Humidity</span>
               <span className="text-white text-[17px]">
